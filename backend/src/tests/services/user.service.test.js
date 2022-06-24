@@ -62,7 +62,7 @@ describe('Login service test', () => {
       }
     });
   });
-  describe.only('Incorrect password', () => {
+  describe('Incorrect password', () => {
     beforeAll(() => {
       user.findOne = jest.fn().mockReturnValue({
         username: 'teste',
