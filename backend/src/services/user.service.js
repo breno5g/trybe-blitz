@@ -14,6 +14,11 @@ const create = async (data) => {
   });
 };
 
+const login = async () => {
+  throw new MyError(400, 'Incorrect email or password');
+};
+
 module.exports = {
   create,
+  login,
 };

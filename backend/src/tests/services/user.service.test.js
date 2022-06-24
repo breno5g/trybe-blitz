@@ -53,7 +53,7 @@ describe.only('Login service test', () => {
 
     test('User email not exists', async () => {
       try {
-        await service.getUser({
+        await service.login({
           email: 'teste@teste.com',
           password: 'nemtem',
         });
