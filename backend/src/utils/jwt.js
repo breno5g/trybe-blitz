@@ -31,7 +31,6 @@ class JWT {
   generateToken(user) {
     const { jwtSecret, jwtConfig } = this;
     const token = jwt.sign({ data: user }, jwtSecret, jwtConfig);
-    console.log(token);
     return token;
   }
 
