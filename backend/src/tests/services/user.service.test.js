@@ -88,7 +88,7 @@ describe('Login service test', () => {
       }
     });
   });
-  describe.only('Success case', () => {
+  describe('Success case', () => {
     beforeAll(() => {
       user.findOne = jest.fn().mockReturnValue({
         username: 'teste',
@@ -110,6 +110,7 @@ describe('Login service test', () => {
       });
 
       expect(res.username).toBe('teste');
+      expect(res.email).toBe('teste@teste.com');
     });
   });
 });

@@ -17,11 +17,16 @@ const create = async (data) => {
 const login = async (data) => {
   const userData = await user.findOne({ where: { email: data.email } });
   if (!userData) throw new MyError(400, 'Incorrect email or password');
-  const validatePassword = bcrypt.comparePassword(
+  const validatePassword = await bcrypt.comparePassword(
     data.password,
     userData.password
   );
+  console.log(validatePassword);
   if (!validatePassword) throw new MyError(400, 'Incorrect email or password');
+  return {
+    username: userData.username,
+    email: userData.email,
+  };
 };
 
 module.exports = {
