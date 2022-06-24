@@ -56,7 +56,7 @@ describe('Register controller tests', () => {
 });
 
 describe('Login controller tests', () => {
-  describe('Fail cases', () => {
+  describe('Fail case', () => {
     let req = mockRequest();
     let res = mockResponse();
     let next = mockNext();
@@ -79,6 +79,29 @@ describe('Login controller tests', () => {
           message: 'Incorrect email or password',
         });
       }
+    });
+  });
+  describe('Success case', () => {
+    let req = mockRequest();
+    let res = mockResponse();
+    let next = mockNext();
+    beforeAll(() => {
+      service.create = jest
+        .fn()
+        .mockReturnValue({ username: 'teste', email: 'teste@teste.com' });
+    });
+
+    afterAll(() => {
+      service.create.mockReset();
+    });
+
+    test('Make login successfuly', async () => {
+      await controller.login();
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        username: 'teste',
+        email: 'teste@teste.com',
+      });
     });
   });
 });
