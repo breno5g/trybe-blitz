@@ -42,7 +42,7 @@ describe('Register service tests', () => {
 });
 
 describe.only('Login service test', () => {
-  describe('Fail case', () => {
+  describe('Incorrect email', () => {
     beforeAll(() => {
       user.findOne = jest.fn().mockReturnValue();
     });
@@ -59,6 +59,26 @@ describe.only('Login service test', () => {
         });
       } catch (err) {
         expect(err.message).toBe('Incorrect email or password');
+      }
+    });
+  });
+  describe('Incorrect password', () => {
+    beforeAll(() => {
+      user.findOne = jest.fn().mockReturnValue({
+        email: 'teste@teste.com',
+        password: 'teskajdlksaj',
+      });
+    });
+
+    afterAll(() => {
+      user.findOne.mockReset();
+    });
+
+    test('Incorrect password', async () => {
+      try {
+        await service.login();
+      } catch (error) {
+        expect(error.message).toBe(`Incorrect email or password`);
       }
     });
   });
