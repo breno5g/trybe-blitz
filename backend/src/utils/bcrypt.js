@@ -9,11 +9,11 @@ const generatePassword = async (password) => {
 };
 
 const comparePassword = async (password, encrypted) => {
-  const isPassword = await bcrypt.compare(password, encrypted );
+  const isPassword = await bcrypt.compare(password, encrypted);
   return isPassword;
 };
 
 module.exports = {
   generatePassword,
-  comparePassword
+  comparePassword,
 };
