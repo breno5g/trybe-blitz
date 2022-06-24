@@ -1,6 +1,7 @@
 const { user } = require('../database/models');
 const bcrypt = require('../utils/bcrypt');
 const MyError = require('../utils/error.class');
+const JWT = require('../utils/jwt');
 
 const create = async (data) => {
   const userExists = await user.findOne({ where: { email: data.email } });
@@ -26,6 +27,10 @@ const login = async (data) => {
   return {
     username: userData.username,
     email: userData.email,
+    token: new JWT().generateToken({
+      email: userData.email,
+      username: userData.username,
+    }),
   };
 };
 
