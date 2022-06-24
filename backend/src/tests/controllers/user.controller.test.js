@@ -88,7 +88,11 @@ describe('Login controller tests', () => {
     beforeAll(() => {
       service.login = jest
         .fn()
-        .mockReturnValue({ username: 'teste', email: 'teste@teste.com' });
+        .mockReturnValue({
+          username: 'teste',
+          email: 'teste@teste.com',
+          token: 'fakeToken',
+        });
     });
 
     afterAll(() => {
@@ -101,6 +105,7 @@ describe('Login controller tests', () => {
       expect(res.json).toHaveBeenCalledWith({
         username: 'teste',
         email: 'teste@teste.com',
+        token: 'fakeToken',
       });
     });
   });
