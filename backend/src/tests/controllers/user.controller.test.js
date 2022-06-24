@@ -54,3 +54,31 @@ describe('Register controller tests', () => {
     });
   });
 });
+
+describe('Login controller tests', () => {
+  describe('Fail cases', () => {
+    let req = mockRequest();
+    let res = mockResponse();
+    let next = mockNext();
+    beforeAll(() => {
+      service.create = jest.fn().mockImplementation(() => {
+        throw new MyError(400, 'Incorrect email or password');
+      });
+    });
+
+    afterAll(() => {
+      service.create.mockReset();
+    });
+
+    test('Incorrect email or password', async () => {
+      try {
+        await controller.login(req, res, next);
+      } catch (err) {
+        expect(next).toHaveBeenCalledWith({
+          status: 400,
+          message: 'Incorrect email or password',
+        });
+      }
+    });
+  });
+});
