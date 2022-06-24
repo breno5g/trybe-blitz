@@ -41,7 +41,7 @@ describe('Register service tests', () => {
   });
 });
 
-describe.only('Login service test', () => {
+describe('Login service test', () => {
   describe('Incorrect email', () => {
     beforeAll(() => {
       user.findOne = jest.fn().mockReturnValue();
@@ -62,11 +62,13 @@ describe.only('Login service test', () => {
       }
     });
   });
-  describe('Incorrect password', () => {
+  describe.only('Incorrect password', () => {
     beforeAll(() => {
       user.findOne = jest.fn().mockReturnValue({
+        username: 'teste',
         email: 'teste@teste.com',
-        password: 'teskajdlksaj',
+        password:
+          '$2b$10$UvTADVQL4kYuI8Aikl6M6.ZEX3MZLaeCJWdWyYU49V2Ns0u0udtye',
       });
     });
 
@@ -76,8 +78,13 @@ describe.only('Login service test', () => {
 
     test('Incorrect password', async () => {
       try {
-        await service.login();
+        await service.login({
+          username: 'teste',
+          email: 'teste@teste.com',
+          password: 'senhaFeia',
+        });
       } catch (error) {
+        console.log(error);
         expect(error.message).toBe(`Incorrect email or password`);
       }
     });

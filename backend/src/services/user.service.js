@@ -14,8 +14,14 @@ const create = async (data) => {
   });
 };
 
-const login = async () => {
-  throw new MyError(400, 'Incorrect email or password');
+const login = async (data) => {
+  const userData = await user.findOne({ where: { email: data.email } });
+  if (!user) throw new MyError(400, 'Incorrect email or password');
+  const validatePassword = bcrypt.comparePassword(
+    data.password,
+    userData.password
+  );
+  if (!validatePassword) throw new MyError(400, 'Incorrect email or password');
 };
 
 module.exports = {
