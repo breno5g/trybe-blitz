@@ -14,4 +14,5 @@ module.exports = {
     return res;
   },
   mockNext: () => jest.fn(),
+  mockError: () => jest.fn(),
 };
