@@ -61,13 +61,13 @@ describe('Login controller tests', () => {
     let res = mockResponse();
     let next = mockNext();
     beforeAll(() => {
-      service.create = jest.fn().mockImplementation(() => {
+      service.login = jest.fn().mockImplementation(() => {
         throw new MyError(400, 'Incorrect email or password');
       });
     });
 
     afterAll(() => {
-      service.create.mockReset();
+      service.login.mockReset();
     });
 
     test('Incorrect email or password', async () => {
@@ -86,17 +86,17 @@ describe('Login controller tests', () => {
     let res = mockResponse();
     let next = mockNext();
     beforeAll(() => {
-      service.create = jest
+      service.login = jest
         .fn()
         .mockReturnValue({ username: 'teste', email: 'teste@teste.com' });
     });
 
     afterAll(() => {
-      service.create.mockReset();
+      service.login.mockReset();
     });
 
     test('Make login successfuly', async () => {
-      await controller.login();
+      await controller.login(req, res, next);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         username: 'teste',
