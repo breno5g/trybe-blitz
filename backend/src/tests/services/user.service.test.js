@@ -40,3 +40,27 @@ describe('Register service tests', () => {
     });
   });
 });
+
+describe.only('Login service test', () => {
+  describe('Fail case', () => {
+    beforeAll(() => {
+      user.findOne = jest.fn().mockReturnValue();
+    });
+
+    afterAll(() => {
+      user.findOne.mockReset();
+    });
+
+    test('User email not exists', async () => {
+      try {
+        await service.getUser({
+          email: 'teste@teste.com',
+          password: 'nemtem',
+        });
+      } catch (err) {
+        expect(err.message).toBe('Incorrect email or password');
+      }
+    });
+  });
+  // describe('Success case', () => {});
+});
