@@ -16,7 +16,6 @@ describe('Register service tests', () => {
       try {
         await service.create({});
       } catch (error) {
-        console.log(error.message);
         expect(error.message).toBe('User already exists');
       }
     });
@@ -89,5 +88,28 @@ describe('Login service test', () => {
       }
     });
   });
-  // describe('Success case', () => {});
+  describe.only('Success case', () => {
+    beforeAll(() => {
+      user.findOne = jest.fn().mockReturnValue({
+        username: 'teste',
+        email: 'teste@teste.com',
+        password:
+          '$2b$10$UvTADVQL4kYuI8Aikl6M6.ZEX3MZLaeCJWdWyYU49V2Ns0u0udtye',
+      });
+    });
+
+    afterAll(() => {
+      user.findOne.mockReset();
+    });
+
+    test("It's possible to make login", async () => {
+      const res = await service.login({
+        username: 'teste',
+        email: 'teste@teste.com',
+        password: 'senhaBonita',
+      });
+
+      expect(res.username).toBe('teste');
+    });
+  });
 });
