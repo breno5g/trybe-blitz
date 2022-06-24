@@ -1,7 +1,11 @@
 const service = require('../../services/user.service');
 const controller = require('../../controllers/user.controller.');
 const MyError = require('../../utils/error.class');
-const { mockRequest, mockResponse, mockNext } = require('../mocks/reqRes.mock');
+const {
+  mockRequest,
+  mockResponse,
+  mockNext,
+} = require('../mocks/express.mock');
 
 describe('Register controller tests', () => {
   describe('Fail case', () => {
