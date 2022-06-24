@@ -1,7 +1,7 @@
 const { user } = require('../database/models');
 const bcrypt = require('../utils/bcrypt');
 const MyError = require('../utils/error.class');
-const JWT = require('../utils/jwt');
+const JWT = require('../utils/jwt.class');
 
 const create = async (data) => {
   const userExists = await user.findOne({ where: { email: data.email } });
