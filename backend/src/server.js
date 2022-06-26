@@ -10,7 +10,25 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+const DisableTryItOutPlugin = function () {
+  return {
+    statePlugins: {
+      spec: {
+        wrapSelectors: {
+          allowTryItOutFor: () => () => false,
+        },
+      },
+    },
+  };
+};
+
+const options = {
+  swaggerOptions: {
+    plugins: [DisableTryItOutPlugin],
+  },
+};
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, options));
 
 app.use(routes);
 
