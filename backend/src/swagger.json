@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Trybe-blitz",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a dui nibh. Morbi ante odio, eleifend quis risus nec, laoreet sagittis lacus. Curabitur pellentesque dolor a neque eleifend elementum. Suspendisse tellus magna, elementum vel mauris viverra, luctus commodo leo. Nullam sed varius nisi. Vestibulum tincidunt nunc eget nisi dictum, ut eleifend orci fermentum. Morbi sollicitudin aliquam sem in posuere. Integer egestas non enim a auctor. ",
+    "contact": {
+      "name": "Breno Santos",
+      "url": "https://github.com/breno5g/"
+    },
+    "version": "1.0.0"
+  }
+}
