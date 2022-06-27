@@ -1,5 +1,5 @@
 const service = require('../../services/user.service');
-const controller = require('../../controllers/user.controller.');
+const controller = require('../../controllers/user.controller');
 const MyError = require('../../utils/error.class');
 const {
   mockRequest,
@@ -86,13 +86,11 @@ describe('Login controller tests', () => {
     let res = mockResponse();
     let next = mockNext();
     beforeAll(() => {
-      service.login = jest
-        .fn()
-        .mockReturnValue({
-          username: 'teste',
-          email: 'teste@teste.com',
-          token: 'fakeToken',
-        });
+      service.login = jest.fn().mockReturnValue({
+        username: 'teste',
+        email: 'teste@teste.com',
+        token: 'fakeToken',
+      });
     });
 
     afterAll(() => {
