@@ -15,19 +15,16 @@ describe('Get all tasks - controller tests', () => {
     let next = mockNext();
     beforeAll(() => {
       service.getAll = jest.fn().mockReturnValue(dataMock);
-      req.headers.authorization =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxMCwidXNlcm5hbWUiOiJ0ZXN0ZSIsImVtYWlsIjoidGVzdGVAdGVzdGUuY29tIn0sImlhdCI6MTY1NjMyODYyOSwiZXhwIjoxNjU2OTMzNDI5fQ.a0QMCCbl3aJYZykj4PLqjaihNT5dY4QZHVTZD6ELj1I';
     });
 
     afterAll(() => {
       service.getAll.mockReset();
-      req.mockReset();
     });
 
-    test('User already exists', async () => {
+    test('Success', async () => {
       await controller.getAll(req, res, next);
       expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith(dataMock);
+      expect(res.json).toHaveBeenCalledWith({ data: dataMock });
     });
   });
 });
