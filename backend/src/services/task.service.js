@@ -6,7 +6,11 @@ const getAll = async (token) => {
   const tasks = await user.findAll({
     where: { id },
     attributes: { exclude: ['password'] },
-    include: { model: task, as: 'task' },
+    include: {
+      model: task,
+      as: 'task',
+      attributes: { exclude: ['userId', 'id'] },
+    },
   });
   return tasks;
 };
