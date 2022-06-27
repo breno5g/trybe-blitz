@@ -3,9 +3,10 @@ const router = express.Router();
 
 const controller = require('../controllers/task.controller');
 const validateToken = require('../middlewares/validateToken.middleware');
+const taskBodyValidate = require('../middlewares/taskBodyValidate.middleware');
 
 router.get('/', validateToken, controller.getAll);
-router.post('/', validateToken, controller.create);
+router.post('/', validateToken, taskBodyValidate, controller.create);
 // router.post('/register', controller.create);
 
 module.exports = router;
