@@ -29,8 +29,15 @@ describe('Create task - service test', () => {
       task.create.mockReset();
     });
     test('task created successfully', async () => {
-      await service.create();
-      expect(task.create).toHaveBeenCalled();
+      const mock = {
+        title: 'Fiquei sem ideia',
+        description: 'aqui também',
+        user_id: 3,
+        status: 'done',
+        createdAt: new Date(),
+      };
+      await service.create(mock);
+      expect(task.create).toHaveBeenCalledWith(mock);
     });
   });
 });
