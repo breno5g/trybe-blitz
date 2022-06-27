@@ -4,7 +4,7 @@ const create = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     await service.create({ username, email, password });
-    res.status(201).json({ message: 'user created successfully' });
+    res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
     next(error);
   }
