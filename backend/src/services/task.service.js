@@ -15,6 +15,11 @@ const getAll = async (token) => {
   return tasks;
 };
 
+const create = async (data) => {
+  await task.create({ ...data, createdAt: new Date() });
+};
+
 module.exports = {
   getAll,
+  create,
 };
