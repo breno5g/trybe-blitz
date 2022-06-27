@@ -1,7 +1,6 @@
 const { user } = require('../../database/models');
 const service = require('../../services/task.service');
 const dataMock = require('../mocks/data.mock');
-// const jest = require("jest")
 
 describe('Get All tasks service tests', () => {
   beforeAll(() => {
