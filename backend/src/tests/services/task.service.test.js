@@ -32,7 +32,7 @@ describe('Create task - service test', () => {
       const mock = {
         title: 'Fiquei sem ideia',
         description: 'aqui também',
-        user_id: 3,
+        userId: 3,
         status: 'done',
         createdAt: new Date(),
       };

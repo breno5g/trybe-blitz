@@ -10,4 +10,14 @@ const getAll = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll };
+const create = async (req, res, next) => {
+  try {
+    const { title, description, status, userId } = req.body;
+    await service.create({ title, description, status, userId });
+    return res.status(201).json({ message: 'task created successfully' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAll, create };
