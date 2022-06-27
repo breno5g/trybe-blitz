@@ -9,7 +9,7 @@ const getAll = async (token) => {
     include: {
       model: task,
       as: 'task',
-      attributes: { exclude: ['userId', 'id'] },
+      attributes: { exclude: ['userId'] },
     },
   });
   return tasks;
