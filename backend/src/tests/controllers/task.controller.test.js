@@ -28,3 +28,26 @@ describe('Get all tasks - controller tests', () => {
     });
   });
 });
+
+describe('Create new task - controller test', () => {
+  describe('Success case', () => {
+    let req = mockRequest();
+    let res = mockResponse();
+    let next = mockNext();
+    beforeAll(() => {
+      service.create = jest.fn();
+    });
+
+    afterAll(() => {
+      service.create.mockReset();
+    });
+
+    test('task created successfully', async () => {
+      await controller.create(req, res, next);
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'task created successfully',
+      });
+    });
+  });
+});
