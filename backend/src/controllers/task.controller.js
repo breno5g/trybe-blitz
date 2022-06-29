@@ -32,9 +32,9 @@ const remove = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { title, description, status, userId } = req.body;
+    const { title, description, status, id } = req.body;
     const { authorization } = req.headers;
-    await service.update({ title, description, status, userId }, authorization);
+    await service.update({ title, description, status, id }, authorization);
     return res.status(204).json({ message: 'resource updated successfully' });
   } catch (error) {
     next(error);

@@ -24,13 +24,11 @@ const remove = async (id) => {
   await task.destroy({ where: { id } });
 };
 
-const update = async ({ title, description, status, userId }, token) => {
-  const id = new JWT().validateToken(token).data.id;
-  if (id !== userId) throw new MyError(401, 'Action not allowed');
+const update = async ({ title, description, status, id }) => {
   await task.update(
     { title, description, status },
     {
-      where: { userId },
+      where: { id },
     }
   );
 };
