@@ -42,7 +42,7 @@ describe('Create task - service test', () => {
   });
 });
 
-describe.only('Delete a task - service test', () => {
+describe('Delete a task - service test', () => {
   describe('Success case', () => {
     beforeAll(() => {
       task.destroy = jest.fn();

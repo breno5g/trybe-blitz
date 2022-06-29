@@ -52,3 +52,26 @@ describe('Create new task - controller test', () => {
   });
 });
 
+describe.only('Delete a task - controller test', () => {
+  let req = mockRequest();
+  let res = mockResponse();
+  let next = mockNext();
+  describe('Success case', () => {
+    beforeAll(() => {
+      service.remove = jest.fn();
+      req.params.id = 1;
+    });
+
+    afterAll(() => {
+      service.remove = jest.fn();
+    });
+
+    test('Can delete a task', async () => {
+      await controller.remove(req, res, next);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'Task have been deleted',
+      });
+    });
+  });
+});
