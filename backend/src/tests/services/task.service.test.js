@@ -61,30 +61,33 @@ describe('Delete a task - service test', () => {
 });
 
 describe('Edit a task - service test', () => {
-  // describe('Fail case', () => {
-  //   beforeAll(() => {
-  //     task.update = jest.fn();
-  //   });
+  describe('Fail case', () => {
+    beforeAll(() => {
+      task.update = jest.fn();
+      task.findOne = jest.fn().mockReturnValue({ userId: 2 });
+    });
 
-  //   afterAll(() => {
-  //     task.update = jest.fn();
-  //   });
+    afterAll(() => {
+      task.update = jest.fn();
+    });
 
-  //   test('Can update a task', async () => {
-  //     const userId = 10;
-  //     const title = 'teste';
-  //     const description = 'teste';
-  //     const status = 'pending';
-  //     const token =
-  //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RlIiwiZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20ifSwiaWF0IjoxNjU2NTA4ODM2LCJleHAiOjg2NTY1NjUwODgzNn0.gzgkC3DQUQFqgpsnPH_s12BNrvoBhcYlZ7MAnWd8Qio';
+    test('Can update a task', async () => {
+      const id = 10;
+      const title = 'teste';
+      const description = 'teste';
+      const status = 'pending';
+      const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RlIiwiZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20ifSwiaWF0IjoxNjU2NTA4ODM2LCJleHAiOjg2NTY1NjUwODgzNn0.gzgkC3DQUQFqgpsnPH_s12BNrvoBhcYlZ7MAnWd8Qio';
 
-  //     try {
-  //       await service.update({ title, description, status, userId }, token);
-  //     } catch (error) {
-  //       expect(error.message).toBe('Action not allowed');
-  //     }
-  //   });
-  // });
+      try {
+        await service.update({ title, description, status, id }, token);
+      } catch (error) {
+        expect(error.message).toBe(
+          'You are not allowed to update tasks on other users'
+        );
+      }
+    });
+  });
 
   describe('Success case', () => {
     beforeAll(() => {
