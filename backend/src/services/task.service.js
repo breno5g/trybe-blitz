@@ -1,6 +1,5 @@
 const { user, task } = require('../database/models');
 const JWT = require('../utils/jwt.class');
-const MyError = require('../utils/error.class');
 
 const getAll = async (token) => {
   const id = new JWT().validateToken(token).data.id;
