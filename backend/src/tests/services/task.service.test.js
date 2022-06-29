@@ -45,16 +45,17 @@ describe('Create task - service test', () => {
 describe.only('Delete a task - service test', () => {
   describe('Success case', () => {
     beforeAll(() => {
-      task.delete = jest.fn();
+      task.destroy = jest.fn();
     });
 
     afterAll(() => {
-      task.delete = jest.fn();
+      task.destroy = jest.fn();
     });
 
     test('Can delete a task', async () => {
-      await service.remove(1);
-      expect(task.delete).toHaveBeenCalledWith(1);
+      const mockId = 1;
+      await service.remove(mockId);
+      expect(task.destroy).toHaveBeenCalledWith({ where: { id: mockId } });
     });
   });
 });

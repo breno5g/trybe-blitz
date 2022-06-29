@@ -19,7 +19,12 @@ const create = async (data) => {
   await task.create({ ...data, createdAt: new Date() });
 };
 
+const remove = async (id) => {
+  await task.destroy({ where: { id } });
+};
+
 module.exports = {
   getAll,
   create,
+  remove,
 };
