@@ -59,3 +59,29 @@ describe('Delete a task - service test', () => {
     });
   });
 });
+
+describe.only('Edit a task - service test', () => {
+  describe('Success case', () => {
+    beforeAll(() => {
+      task.update = jest.fn();
+    });
+
+    afterAll(() => {
+      task.update = jest.fn();
+    });
+
+    test('Can update a task', async () => {
+      const userId = 1;
+      const title = 'teste';
+      const description = 'teste';
+      const status = 'pending';
+      await service.update();
+      expect(task.update).toHaveBeenCalledWith(
+        { title, description, status },
+        {
+          where: { userId },
+        }
+      );
+    });
+  });
+});
