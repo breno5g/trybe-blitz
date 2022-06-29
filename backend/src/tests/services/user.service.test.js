@@ -83,7 +83,6 @@ describe('Login service test', () => {
           password: 'senhaFeia',
         });
       } catch (error) {
-        console.log(error);
         expect(error.message).toBe(`Incorrect email or password`);
       }
     });

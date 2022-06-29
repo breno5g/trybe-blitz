@@ -41,4 +41,16 @@ class JWT {
   }
 }
 
+// const teste = new JWT();
+// teste.generateToken({
+//   id: 10,
+//   username: 'teste',
+//   email: 'teste@teste.com',
+// });
+// console.log(
+//   teste.validateToken(
+//     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxMCwidXNlcm5hbWUiOiJ0ZXN0ZSIsImVtYWlsIjoidGVzdGVAdGVzdGUuY29tIn0sImlhdCI6MTY1NjMyODYyOSwiZXhwIjoxNjU2OTMzNDI5fQ.a0QMCCbl3aJYZykj4PLqjaihNT5dY4QZHVTZD6ELj1I'
+//   )
+// );
+
 module.exports = JWT;

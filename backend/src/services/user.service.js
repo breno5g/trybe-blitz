@@ -22,12 +22,12 @@ const login = async (data) => {
     data.password,
     userData.password
   );
-  console.log(validatePassword);
   if (!validatePassword) throw new MyError(400, 'Incorrect email or password');
   return {
     username: userData.username,
     email: userData.email,
     token: new JWT().generateToken({
+      id: userData.id,
       email: userData.email,
       username: userData.username,
     }),
