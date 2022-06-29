@@ -41,3 +41,20 @@ describe('Create task - service test', () => {
     });
   });
 });
+
+describe.only('Delete a task - service test', () => {
+  describe('Success case', () => {
+    beforeAll(() => {
+      task.delete = jest.fn();
+    });
+
+    afterAll(() => {
+      task.delete = jest.fn();
+    });
+
+    test('Can delete a task', async () => {
+      await service.remove(1);
+      expect(task.delete).toHaveBeenCalledWith(1);
+    });
+  });
+});

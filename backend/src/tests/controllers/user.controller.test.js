@@ -49,7 +49,7 @@ describe('Register controller tests', () => {
       await controller.create(req, res, next);
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'user created successfully',
+        message: 'User created successfully',
       });
     });
   });
