@@ -9,7 +9,7 @@ const taskUpdateBodyValidate = require('../middlewares/taskUpdateBodyValidate.mi
 router.get('/', validateToken, controller.getAll);
 router.post('/', validateToken, taskBodyValidate, controller.create);
 router.delete('/:id', validateToken, controller.remove);
-router.put('/:id', validateToken, taskUpdateBodyValidate, controller.update);
+router.put('/', validateToken, taskUpdateBodyValidate, controller.update);
 // router.post('/register', controller.create);
 
 module.exports = router;
