@@ -76,7 +76,7 @@ describe('Delete a task - controller test', () => {
   });
 });
 
-describe.only('Edit a task - controller test', () => {
+describe('Edit a task - controller test', () => {
   describe('Fail case', () => {
     let req = mockRequest();
     let res = mockResponse();
@@ -132,12 +132,7 @@ describe.only('Edit a task - controller test', () => {
 
     test('Can update a task', async () => {
       await controller.update(req, res, next);
-      expect(task.update).toHaveBeenCalledWith(
-        { ...obj },
-        {
-          where: { userId },
-        }
-      );
+      expect(res.status).toHaveBeenCalledWith(204);
     });
   });
 });
