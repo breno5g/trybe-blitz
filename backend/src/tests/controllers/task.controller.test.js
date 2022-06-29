@@ -75,3 +75,69 @@ describe('Delete a task - controller test', () => {
     });
   });
 });
+
+describe.only('Edit a task - controller test', () => {
+  describe('Fail case', () => {
+    let req = mockRequest();
+    let res = mockResponse();
+    let next = mockNext();
+    beforeAll(() => {
+      service.update = jest.fn();
+      req.body = {
+        userId: 10,
+        title: 'teste',
+        description: 'teste',
+        status: 'pending',
+      };
+      req.headers.authorization =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RlIiwiZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20ifSwiaWF0IjoxNjU2NTA4ODM2LCJleHAiOjg2NTY1NjUwODgzNn0.gzgkC3DQUQFqgpsnPH_s12BNrvoBhcYlZ7MAnWd8Qio';
+    });
+
+    afterAll(() => {
+      service.update = jest.fn();
+    });
+
+    test('Can update a task', async () => {
+      try {
+        await controller.update(req, res, next);
+      } catch (error) {
+        expect(next).toHaveBeenCalled();
+      }
+    });
+  });
+
+  describe('Success case', () => {
+    let req = mockRequest();
+    let res = mockResponse();
+    let next = mockNext();
+    const obj = {
+      title: 'teste',
+      description: 'teste',
+      status: 'pending',
+    };
+    const userId = 1;
+    beforeAll(() => {
+      service.update = jest.fn();
+      req.body = {
+        userId,
+        ...obj,
+      };
+      req.headers.authorization =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RlIiwiZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20ifSwiaWF0IjoxNjU2NTA4ODM2LCJleHAiOjg2NTY1NjUwODgzNn0.gzgkC3DQUQFqgpsnPH_s12BNrvoBhcYlZ7MAnWd8Qio';
+    });
+
+    afterAll(() => {
+      service.update = jest.fn();
+    });
+
+    test('Can update a task', async () => {
+      await controller.update(req, res, next);
+      expect(task.update).toHaveBeenCalledWith(
+        { ...obj },
+        {
+          where: { userId },
+        }
+      );
+    });
+  });
+});

@@ -60,7 +60,7 @@ describe('Delete a task - service test', () => {
   });
 });
 
-describe.only('Edit a task - service test', () => {
+describe('Edit a task - service test', () => {
   describe('Fail case', () => {
     beforeAll(() => {
       task.update = jest.fn();
