@@ -7,6 +7,7 @@ const taskBodyValidate = require('../middlewares/taskBodyValidate.middleware');
 
 router.get('/', validateToken, controller.getAll);
 router.post('/', validateToken, taskBodyValidate, controller.create);
+router.delete('/:id', validateToken, controller.remove);
 // router.post('/register', controller.create);
 
 module.exports = router;
