@@ -52,7 +52,7 @@ describe('Create new task - controller test', () => {
   });
 });
 
-describe.only('Delete a task - controller test', () => {
+describe('Delete a task - controller test', () => {
   let req = mockRequest();
   let res = mockResponse();
   let next = mockNext();

@@ -20,4 +20,14 @@ const create = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, create };
+const remove = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await service.remove(id);
+    return res.status(200).json({ message: 'Task have been deleted' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAll, create, remove };
