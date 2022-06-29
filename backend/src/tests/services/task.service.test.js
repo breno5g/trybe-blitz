@@ -75,7 +75,10 @@ describe.only('Edit a task - service test', () => {
       const title = 'teste';
       const description = 'teste';
       const status = 'pending';
-      await service.update();
+      const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RlIiwiZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20ifSwiaWF0IjoxNjU2NTA4ODM2LCJleHAiOjg2NTY1NjUwODgzNn0.gzgkC3DQUQFqgpsnPH_s12BNrvoBhcYlZ7MAnWd8Qio';
+
+      await service.update({ title, description, status, userId }, token);
       expect(task.update).toHaveBeenCalledWith(
         { title, description, status },
         {

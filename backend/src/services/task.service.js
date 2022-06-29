@@ -1,5 +1,6 @@
 const { user, task } = require('../database/models');
 const JWT = require('../utils/jwt.class');
+const MyError = require('../utils/error.class');
 
 const getAll = async (token) => {
   const id = new JWT().validateToken(token).data.id;
@@ -23,8 +24,20 @@ const remove = async (id) => {
   await task.destroy({ where: { id } });
 };
 
+const update = async ({ title, description, status, userId }, token) => {
+  const id = new JWT().validateToken(token).data.id;
+  if (id !== userId) throw new MyError(401, 'Action not allowed');
+  await task.update(
+    { title, description, status },
+    {
+      where: { userId },
+    }
+  );
+};
+
 module.exports = {
   getAll,
   create,
   remove,
+  update,
 };
