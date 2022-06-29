@@ -37,7 +37,6 @@ const update = async (req, res, next) => {
     await service.update({ title, description, status, id }, authorization);
     return res.status(204).json({ message: 'resource updated successfully' });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
