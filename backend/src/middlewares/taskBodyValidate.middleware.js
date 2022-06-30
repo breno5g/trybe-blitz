@@ -2,11 +2,11 @@ const { create } = require('../schemas/task');
 // const JWT = require('../utils/jwt.class');
 
 const taskBodyValidate = (req, res, next) => {
-  const { title, description, status, userId } = req.body;
+  const { title, description, status } = req.body;
   // const { authorization } = req.headers;
   // const id = new JWT().validateToken(authorization).data.id;
 
-  const { error } = create.validate({ title, description, status, userId });
+  const { error } = create.validate({ title, description, status });
   if (error) {
     next({ status: 400, message: error.message });
   }
