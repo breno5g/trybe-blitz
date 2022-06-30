@@ -16,8 +16,9 @@ const getAll = async (token) => {
   return tasks;
 };
 
-const create = async (data) => {
-  await task.create({ ...data, createdAt: new Date() });
+const create = async (data, token) => {
+  const userId = new JWT().validateToken(token).data.id;
+  await task.create({ ...data, userId, createdAt: new Date() });
 };
 
 const remove = async (id) => {

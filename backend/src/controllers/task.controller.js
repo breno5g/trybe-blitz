@@ -12,8 +12,9 @@ const getAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { title, description, status, userId } = req.body;
-    await service.create({ title, description, status, userId });
+    const { title, description, status } = req.body;
+    const { authorization } = req.headers;
+    await service.create({ title, description, status }, authorization);
     return res.status(201).json({ message: 'task created successfully' });
   } catch (error) {
     next(error);

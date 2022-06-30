@@ -16,29 +16,6 @@
     }
   ],
   "paths": {
-    "/login": {
-      "post": {
-        "summary": "User login",
-        "tags": ["User"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Login"
-              },
-              "examples": {
-                "bola8": {
-                  "value": {
-                    "email": "bola8@gmail.com",
-                    "password": "vaiRolarLilFarm?"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/register": {
       "post": {
         "summary": "User register",
@@ -77,6 +54,184 @@
           }
         }
       }
+    },
+    "/login": {
+      "post": {
+        "summary": "User login",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "bola8": {
+                  "value": {
+                    "email": "bola8@gmail.com",
+                    "password": "vaiRolarLilFarm?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/schemas/loginResponseOk"
+                },
+                "examples": {
+                  "bola8": {
+                    "value": {
+                      "username": "bola8",
+                      "email": "bola8@gmail.com",
+                      "token": "djaskjdljasndjasjdnmasld,asdaslçdç,laçskdlçkasjd.as~.dlasj"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect email or password"
+          }
+        }
+      }
+    },
+    "/task": {
+      "get": {
+        "summary": "Get tasks",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTask"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, authentication token is required"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add tasks",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTask"
+              },
+              "examples": {
+                "exemplo": {
+                  "value": {
+                    "title": "examplo",
+                    "description": "exemplo?",
+                    "status": "pending",
+                    "userId": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "task created successfully"
+          },
+          "401": {
+            "description": "Unauthorized, authentication token is required"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Add tasks",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task have been deleted"
+          },
+          "401": {
+            "description": "Unauthorized, authentication token is required"
+          }
+        }
+      },
+      "put": {
+        "summary": "Add tasks",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditTask"
+              },
+              "examples": {
+                "exemplo": {
+                  "value": {
+                    "title": "examplo",
+                    "description": "exemplo?",
+                    "status": "pending"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "resource updated successfully"
+          },
+          "401": {
+            "description": "Unauthorized, authentication token is required"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -100,6 +255,75 @@
             "type": "string"
           },
           "password": {
+            "type": "string"
+          }
+        }
+      },
+      "GetTask": {
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "userdId": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateTask": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "userdId": {
+            "type": "number"
+          }
+        }
+      },
+      "EditTask": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "schemas": {
+      "loginResponseOk": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "token": {
             "type": "string"
           }
         }
