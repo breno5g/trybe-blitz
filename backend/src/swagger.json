@@ -131,6 +131,27 @@
             "description": "Unauthorized, authentication token is required"
           }
         }
+      },
+      "post": {
+        "summary": "Add tasks",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "auth token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "task created successfully"
+          },
+          "401": {
+            "description": "Unauthorized, authentication token is required"
+          }
+        }
       }
     }
   },
