@@ -1,9 +1,62 @@
-import React from 'react';
+import { useState } from 'react';
 import { Container, MainContainer } from './style';
 import logoImg from '../assets/Logo.svg';
 import separatorImg from '../assets/Separator.svg';
+import { toast } from 'react-toastify';
+import { loginSchema, registerSchema } from '../schemas/user.schema';
 
 function Login() {
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
+  const [register, setRegister] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const handleFormChange = ({ target: { name, value } }) => {
+    const inputName = name.split('-');
+    if (inputName[0] === 'login') {
+      setLogin({
+        ...login,
+        [inputName[1]]: value,
+      });
+    } else {
+      setRegister({
+        ...register,
+        [inputName[1]]: value,
+      });
+    }
+  };
+
+  const loginSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const { email, password } = login;
+      if (!email || !password) {
+        return toast.error('Por favor, preencha todos os campos');
+      }
+      await loginSchema.validate({ email, password });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const registerSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const { email, password, username } = register;
+      if (!email || !password || !username) {
+        return toast.error('Por favor, preencha todos os campos');
+      }
+      await registerSchema.validate({ username, email, password });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <MainContainer>
       <section>
@@ -38,20 +91,49 @@ function Login() {
             <h1>Login</h1>
             <legend>Já possui conta? Então bora organizar a vida!</legend>
             <fieldset>
-              <input type='text' placeholder='Email' />
-              <input type='password' placeholder='Senha' />
+              <input
+                type='email'
+                name='login-email'
+                placeholder='Email'
+                onChange={handleFormChange}
+              />
+              <input
+                type='password'
+                name='login-password'
+                placeholder='Senha'
+                onChange={handleFormChange}
+              />
             </fieldset>
-            <button type='submit'>Entrar</button>
+            <button type='submit' onClick={loginSubmit}>
+              Entrar
+            </button>
           </form>
           <form>
             <h1>Sign-up</h1>
             <legend>Não possui conta? Gente, o que você tá esperando!?</legend>
             <fieldset>
-              <input type='text' placeholder='Username' />
-              <input type='text' placeholder='Email' />
-              <input type='password' placeholder='Senha' />
+              <input
+                type='text'
+                name='register-username'
+                placeholder='Username'
+                onChange={handleFormChange}
+              />
+              <input
+                type='text'
+                name='register-email'
+                placeholder='Email'
+                onChange={handleFormChange}
+              />
+              <input
+                type='password'
+                name='register-password'
+                placeholder='Senha'
+                onChange={handleFormChange}
+              />
             </fieldset>
-            <button type='submit'>Registrar</button>
+            <button type='submit' onClick={registerSubmit}>
+              Registrar
+            </button>
           </form>
         </div>
       </Container>
