@@ -4,8 +4,11 @@ import logoImg from '../assets/Logo.svg';
 import separatorImg from '../assets/Separator.svg';
 import { toast } from 'react-toastify';
 import { loginSchema, registerSchema } from '../schemas/user.schema';
+import { api } from '../api/index.mjs';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigation = useNavigate();
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -39,8 +42,17 @@ function Login() {
         return toast.error('Por favor, preencha todos os campos');
       }
       await loginSchema.validate({ email, password });
+      await api.post('/user/login', {
+        email,
+        password,
+      });
+      // toast.success(data.message);
+      navigation('/tasks');
     } catch (error) {
-      toast.error(error.message);
+      if (error.response) {
+        return toast.error(error.response.data.message);
+      }
+      return toast.error(error.message);
     }
   };
 
@@ -52,6 +64,12 @@ function Login() {
         return toast.error('Por favor, preencha todos os campos');
       }
       await registerSchema.validate({ username, email, password });
+      const { data } = await api.post('/user/register', {
+        username,
+        email,
+        password,
+      });
+      toast.success(data.message);
     } catch (error) {
       toast.error(error.message);
     }
