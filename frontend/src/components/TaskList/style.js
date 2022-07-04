@@ -23,7 +23,7 @@ export const Container = styled.ul`
       display: flex;
       gap: 0.5rem;
 
-      select {
+      .status {
         cursor: pointer;
       }
 

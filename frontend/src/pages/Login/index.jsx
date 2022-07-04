@@ -42,10 +42,11 @@ function Login() {
         return toast.error('Por favor, preencha todos os campos');
       }
       await loginSchema.validate({ email, password });
-      await api.post('/user/login', {
+      const user = await api.post('/user/login', {
         email,
         password,
       });
+      localStorage.setItem('blitz-user', JSON.stringify(user.data));
       navigation('/tasks');
     } catch (error) {
       if (error.response) {
