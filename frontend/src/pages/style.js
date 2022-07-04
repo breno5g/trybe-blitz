@@ -91,6 +91,7 @@ export const Container = styled.aside`
       input {
         padding: 0.8rem;
         border: 1px solid #e7ebea;
+        outline: none;
 
         &:first-child {
           border-radius: 0.5rem 0.5rem 0 0;
