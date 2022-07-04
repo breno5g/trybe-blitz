@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function index() {
-  const [tasks, setTasks] = useState();
+  const [tasks, setTasks] = useState([]);
   const [load, setLoad] = useState(true);
   const [userToken, setUserToken] = useState();
   const navigation = useNavigate();
@@ -15,18 +15,18 @@ function index() {
   const getTasks = async () => {
     try {
       const { token } = JSON.parse(localStorage.getItem('blitz-user'));
-      const {
-        data: { data },
-      } = await api.get('/task', {
+      const { data } = await api.get('/task', {
         headers: {
           authorization: token,
         },
       });
       setUserToken(token);
-      setTasks(data[0].task);
+      if (data[0].task) setTasks(data[0].task);
       setLoad(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response) {
+        toast.error(error.response.data.message);
+      }
       navigation('/');
     }
   };
@@ -42,7 +42,7 @@ function index() {
   return (
     <div>
       <Header />
-      <NewTask />
+      <NewTask token={userToken} getTasks={getTasks} />
       <TaskList tasks={tasks} token={userToken} getTasks={getTasks} />
     </div>
   );

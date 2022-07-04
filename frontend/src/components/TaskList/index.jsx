@@ -34,7 +34,7 @@ function index(props) {
       getTasks();
       return toast.success('Tarefa deletada com sucesso');
     } catch (error) {
-      console.log(error);
+      return toast.error(error.message);
     }
   };
 
