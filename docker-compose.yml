@@ -7,7 +7,7 @@ services:
         condition: service_healthy
     build: ./backend
     volumes:
-      - ./backend:/app
+      - ./backend:/backend/app
     container_name: blitz-backend
     restart: unless-stopped
     ports:
@@ -40,3 +40,15 @@ services:
       retries: 5
     cap_add:
       - SYS_NICE # Deve omitir alertas menores
+  front: 
+    depends_on: 
+      - backend
+    build: ./frontend
+    volumes:
+      - ./backend:/frontend/app
+    container_name: blitz-frontend
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
+    restart: unless-stopped
