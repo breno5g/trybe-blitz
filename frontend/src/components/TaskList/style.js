@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.ul`
-  padding: 3rem;
+  padding: 1.5rem 3rem;
 
   li {
     display: flex;
