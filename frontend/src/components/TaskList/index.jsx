@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { BiEdit } from 'react-icons/bi';
 import { Container } from './style';
@@ -22,7 +22,8 @@ const options = [
 ];
 
 function index(props) {
-  const { tasks, token, getTasks } = props;
+  const { tasks, token, getTasks, filter } = props;
+  const [newTaskArr, setNewTaskArr] = useState();
 
   const deleteTask = async (id) => {
     try {
@@ -54,9 +55,13 @@ function index(props) {
     }
   };
 
+  useEffect(() => {
+    setNewTaskArr(tasks.filter((task) => task.title.includes(filter)));
+  }, [filter]);
+
   return (
     <Container>
-      {tasks?.map((task) => (
+      {newTaskArr?.map((task) => (
         <li key={task.id}>
           <div className='content'>
             <span>{task.title}: </span>

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './style';
 
 import logoImg from '../../assets/Logo.svg';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaRegUser } from 'react-icons/fa';
 
-function index() {
+function index({ setFilter }) {
+  const [userData, setUserdata] = useState('');
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('blitz-user'));
+    setUserdata(data);
+  }, []);
+
+  const filter = ({ target: { value } }) => {
+    setFilter(value);
+  };
+
   return (
     <Container>
       <div className='logo'>
@@ -15,11 +26,15 @@ function index() {
       <div className='search'>
         <label htmlFor=''>
           <AiOutlineSearch />
-          <input type='text' placeholder='Pesquise por uma tarefa...' />
+          <input
+            type='text'
+            placeholder='Pesquise por uma tarefa...'
+            onChange={filter}
+          />
         </label>
       </div>
       <div className='user'>
-        <span>breno5g</span>
+        <span>{userData.username}</span>
         <FaRegUser />
       </div>
     </Container>

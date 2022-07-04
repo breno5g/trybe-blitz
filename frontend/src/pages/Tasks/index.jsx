@@ -10,6 +10,7 @@ function index() {
   const [tasks, setTasks] = useState([]);
   const [load, setLoad] = useState(true);
   const [userToken, setUserToken] = useState();
+  const [filter, setFilter] = useState('');
   const navigation = useNavigate();
 
   const getTasks = async () => {
@@ -41,9 +42,14 @@ function index() {
 
   return (
     <div>
-      <Header />
+      <Header setFilter={setFilter} />
       <NewTask token={userToken} getTasks={getTasks} />
-      <TaskList tasks={tasks} token={userToken} getTasks={getTasks} />
+      <TaskList
+        tasks={tasks}
+        token={userToken}
+        getTasks={getTasks}
+        filter={filter}
+      />
     </div>
   );
 }
