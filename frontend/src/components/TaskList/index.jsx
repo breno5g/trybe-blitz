@@ -31,10 +31,26 @@ function index(props) {
           authorization: token,
         },
       });
-      getTasks();
+      await getTasks();
       return toast.success('Tarefa deletada com sucesso');
     } catch (error) {
       return toast.error(error.message);
+    }
+  };
+
+  const updateStatus = async (data, newStatus) => {
+    try {
+      await api.put(
+        'task',
+        { ...data, status: newStatus },
+        { headers: { authorization: token } }
+      );
+      await getTasks();
+      return toast.success('Status atualizado com sucesso');
+    } catch (error) {
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
     }
   };
 
@@ -51,6 +67,7 @@ function index(props) {
               className='status'
               options={options}
               defaultValue={{ value: task.status, label: task.status }}
+              onChange={({ value }) => updateStatus(task, value)}
             ></Select>
             <button onClick={() => deleteTask(task.id)}>
               <TiDeleteOutline />
