@@ -22,7 +22,6 @@ export const MainContainer = styled.div`
     color: white;
 
     main {
-      /* border-bottom: 1px dashed #f5f5f5; */
       display: flex;
       flex-direction: column;
       align-items: center;
