@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Container, MainContainer } from './style';
-import logoImg from '../assets/Logo.svg';
-import separatorImg from '../assets/Separator.svg';
+import logoImg from '../../assets/Logo.svg';
+import separatorImg from '../../assets/Separator.svg';
 import { toast } from 'react-toastify';
-import { loginSchema, registerSchema } from '../schemas/user.schema';
-import { api } from '../api/index.mjs';
+import { loginSchema, registerSchema } from '../../schemas/user.schema';
+import { api } from '../../api/index.mjs';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -46,7 +46,6 @@ function Login() {
         email,
         password,
       });
-      // toast.success(data.message);
       navigation('/tasks');
     } catch (error) {
       if (error.response) {
@@ -71,6 +70,9 @@ function Login() {
       });
       toast.success(data.message);
     } catch (error) {
+      if (error.response) {
+        return toast.error(error.response.data.message);
+      }
       toast.error(error.message);
     }
   };
