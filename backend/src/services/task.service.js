@@ -34,7 +34,6 @@ const update = async ({ title, description, status, id }, token) => {
       'You are not allowed to update tasks on other users'
     );
   }
-  console.log(title, description, status, id);
   await task.update(
     { title, description, status },
     {
