@@ -39,7 +39,7 @@ function index({ token, getTasks }) {
           },
         }
       );
-      getTasks();
+      await getTasks();
       return toast.success('Tarefa criada com sucesso');
     } catch (error) {
       if (error.response) {

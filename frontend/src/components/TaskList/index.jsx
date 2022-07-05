@@ -23,7 +23,6 @@ const options = [
 
 function index(props) {
   const { tasks, token, getTasks, filter } = props;
-  const [newTaskArr, setNewTaskArr] = useState();
 
   const deleteTask = async (id) => {
     try {
@@ -55,36 +54,34 @@ function index(props) {
     }
   };
 
-  useEffect(() => {
-    setNewTaskArr(tasks.filter((task) => task.title.includes(filter)));
-  }, [filter]);
-
   return (
     <Container>
-      {newTaskArr?.map((task) => (
-        <li key={task.id}>
-          <div className='content'>
-            <span>{task.title}: </span>
-            <p>{task.description}</p>
-          </div>
-          <div className='options'>
-            <Select
-              className='status'
-              options={options}
-              defaultValue={
-                options.filter((option) => option.value === task.status)[0]
-              }
-              onChange={({ value }) => updateStatus(task, value)}
-            ></Select>
-            <button onClick={() => deleteTask(task.id)}>
-              <TiDeleteOutline />
-            </button>
-            <button>
-              <BiEdit />
-            </button>
-          </div>
-        </li>
-      ))}
+      {tasks
+        ?.filter((task) => task.title.includes(filter))
+        .map((task) => (
+          <li key={task.id}>
+            <div className='content'>
+              <span>{task.title}: </span>
+              <p>{task.description}</p>
+            </div>
+            <div className='options'>
+              <Select
+                className='status'
+                options={options}
+                defaultValue={
+                  options.filter((option) => option.value === task.status)[0]
+                }
+                onChange={({ value }) => updateStatus(task, value)}
+              ></Select>
+              <button onClick={() => deleteTask(task.id)}>
+                <TiDeleteOutline />
+              </button>
+              <button>
+                <BiEdit />
+              </button>
+            </div>
+          </li>
+        ))}
     </Container>
   );
 }
