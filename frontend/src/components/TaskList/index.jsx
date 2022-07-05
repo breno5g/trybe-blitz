@@ -12,7 +12,7 @@ const options = [
     label: 'Pendente',
   },
   {
-    value: 'completed',
+    value: 'done',
     label: 'Completo',
   },
   {
@@ -71,7 +71,9 @@ function index(props) {
             <Select
               className='status'
               options={options}
-              defaultValue={{ value: task.status, label: task.status }}
+              defaultValue={
+                options.filter((option) => option.value === task.status)[0]
+              }
               onChange={({ value }) => updateStatus(task, value)}
             ></Select>
             <button onClick={() => deleteTask(task.id)}>

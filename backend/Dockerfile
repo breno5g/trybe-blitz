@@ -1,6 +1,6 @@
 FROM node:16
 
-WORKDIR /backend/app
+WORKDIR /back
 
 COPY . .
 
