@@ -25,7 +25,7 @@ describe('Get all tasks - controller tests', () => {
     test('Success', async () => {
       await controller.getAll(req, res, next);
       expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith(dataMock);
     });
   });
 });
