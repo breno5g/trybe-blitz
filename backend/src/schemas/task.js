@@ -9,7 +9,11 @@ const create = joi.object({
 const update = joi.object({
   title: joi.string().min(3).required(),
   description: joi.string().min(3).required(),
-  status: joi.string().min(3).valid('pending', 'completed', 'done').required(),
+  status: joi
+    .string()
+    .min(3)
+    .valid('pending', 'in progress', 'done')
+    .required(),
   id: joi.number().required(),
 });
 

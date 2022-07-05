@@ -1,0 +1,22 @@
+.react-modal-overlay {
+  background-color: #00000050;
+  position: fixed;
+  margin: auto;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+}
+
+.react-modal-close {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  border: 0;
+  background: transparent;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+}
