@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import NewTask from '../../components/NewTask';
 import TaskList from '../../components/TaskList';
+import EditTask from '../../components/EditTask';
+
 import { api } from '../../api/index.mjs';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -11,10 +13,13 @@ function index() {
   const [load, setLoad] = useState(true);
   const [userToken, setUserToken] = useState();
   const [filter, setFilter] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [actualTask, setActualTaks] = useState({});
   const navigation = useNavigate();
 
   const getTasks = async () => {
     try {
+      setTasks([]);
       const { token } = JSON.parse(localStorage.getItem('blitz-user'));
       const { data } = await api.get('/task', {
         headers: {
@@ -30,6 +35,12 @@ function index() {
       }
       navigation('/');
     }
+  };
+
+  const onRequestClose = (task) => {
+    setIsOpen(!isOpen);
+
+    if (task) setActualTaks(task);
   };
 
   useEffect(() => {
@@ -49,6 +60,14 @@ function index() {
         token={userToken}
         getTasks={getTasks}
         filter={filter}
+        onRequestClose={onRequestClose}
+      />
+      <EditTask
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        token={userToken}
+        getTasks={getTasks}
+        task={actualTask}
       />
     </div>
   );

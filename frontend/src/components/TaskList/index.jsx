@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { BiEdit } from 'react-icons/bi';
 import { Container } from './style';
@@ -22,7 +22,7 @@ const options = [
 ];
 
 function index(props) {
-  const { tasks, token, getTasks, filter } = props;
+  const { tasks, token, getTasks, filter, onRequestClose } = props;
 
   const deleteTask = async (id) => {
     try {
@@ -76,7 +76,7 @@ function index(props) {
               <button onClick={() => deleteTask(task.id)}>
                 <TiDeleteOutline />
               </button>
-              <button>
+              <button onClick={() => onRequestClose(task)}>
                 <BiEdit />
               </button>
             </div>

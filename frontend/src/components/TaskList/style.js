@@ -7,7 +7,7 @@ export const Container = styled.ul`
     display: flex;
     list-style: none;
     display: grid;
-    grid-template-columns: 9fr 1fr;
+    grid-template-columns: 8fr 4fr;
     padding: 10px;
     border-radius: 0.25rem;
     box-shadow: 0 5px 5px #33333330;
@@ -23,6 +23,7 @@ export const Container = styled.ul`
     .options {
       display: flex;
       gap: 0.5rem;
+      justify-content: flex-end;
 
       .status {
         cursor: pointer;
