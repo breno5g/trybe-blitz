@@ -83,7 +83,7 @@ describe('Login service test', () => {
           password: 'senhaFeia',
         });
       } catch (error) {
-        expect(error.message).toBe(`Incorrect email or password`);
+        expect(error.message).toBe('Incorrect email or password');
       }
     });
   });
@@ -101,7 +101,7 @@ describe('Login service test', () => {
       user.findOne.mockReset();
     });
 
-    test("It's possible to make login", async () => {
+    test('It\'s possible to make login', async () => {
       const res = await service.login({
         username: 'teste',
         email: 'teste@teste.com',
