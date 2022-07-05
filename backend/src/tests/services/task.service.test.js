@@ -2,6 +2,10 @@ const { user, task } = require('../../database/models');
 const service = require('../../services/task.service');
 const dataMock = require('../mocks/data.mock');
 
+jest
+  .useFakeTimers()
+  .setSystemTime(new Date('2020-01-01'));
+
 describe('Get All tasks - service test', () => {
   beforeAll(() => {
     user.findAll = jest.fn().mockReturnValue(dataMock);
@@ -40,7 +44,7 @@ describe('Create task - service test', () => {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RlIiwiZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20ifSwiaWF0IjoxNjU2NTA4ODM2LCJleHAiOjg2NTY1NjUwODgzNn0.gzgkC3DQUQFqgpsnPH_s12BNrvoBhcYlZ7MAnWd8Qio';
 
       await service.create(mock, token);
-      expect(task.create).toHaveBeenCalled();
+      expect(task.create).toHaveBeenCalledWith(mock);
     });
   });
 });
